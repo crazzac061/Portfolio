@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { fetchArticles } from '../utils/fetchArticles';
-import HomeClient from './HomeClient';
+import { fetchArticles } from '../src/utils/fetchArticles';
+import HomeClient from './Homeclient';
 
 export const revalidate = 3600;
 

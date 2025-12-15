@@ -1,0 +1,28 @@
+{
+    "articles": [
+        {
+            "id": 1,
+            "url": "https://thenetworkbits.substack.com/p/an-overview-of-json",
+            "tags": ["Web Dev", "DevOps", "Cloud"],
+            "title": "",
+            "description": "",
+            "image": ""
+        },
+        {
+            "id": 2,
+            "url": "https://websecuritylab.org/how-safe-is-public-wi-fi-a-network-engineer-explains/",
+            "tags": ["Networking", "Cybersecurity"],
+            "title": "",
+            "description": "",
+            "image": ""
+        },
+        {
+            "id": 3,
+            "url": "https://www.freecodecamp.org/news/automate-cicd-with-github-actions-streamline-workflow/",
+            "tags": ["DevOps"],
+            "title": "",
+            "description": "",
+            "image": ""
+        }
+    ]
+}
