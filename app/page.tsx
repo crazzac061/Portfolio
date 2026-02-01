@@ -1,13 +1,11 @@
-import Image from "next/image";
-import { fetchArticles } from '../src/utils/fetchArticles';
-import HomeClient from './Homeclient';
+import Hero from '@/src/components/hero';
 
-export const revalidate = 3600;
-
-export default async function HomePage() {
-  const articles = await fetchArticles(); 
-
-  return <HomeClient initialArticles={articles} />;
+export default function HomePage() {
+  return (
+    <main>
+      <Hero />
+    </main>
+  );
 }
 
 
