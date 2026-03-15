@@ -63,7 +63,7 @@ export async function fetchArticles(): Promise<Article[]> {
       if(getTitle(data) && getDescription(data) &&
          getPublishedDate(data) && getImageURL(data) &&
          getPlatform(data) || (item.title && item.description &&
-         item.image)) {
+         item.imgUrl)) {
         return {
         ...item,
         id: item.id ?? 0,
@@ -71,7 +71,7 @@ export async function fetchArticles(): Promise<Article[]> {
         title: getTitle(data) || item.title || 'No title',
         description: item.description || getDescription(data) || 'No description',
         publishedDate: getPublishedDate(data) ?? 'No date',
-        imgUrl: getImageURL(data) || item.image || '/img-2.jpg',
+        imgUrl: getImageURL(data) || item.imgUrl || '/img-2.jpg',
         siteName: getPlatform(data) || data.metadata?.publisher?.name || 'Unknown site',
         url: item.url || '',
       } as Article;
