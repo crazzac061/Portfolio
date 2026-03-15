@@ -1,14 +1,22 @@
 import { NextResponse } from 'next/server';
+import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
   const { password } = await request.json();
 
-  // In a real app, you would use environment variables and proper hashing
-  // For this portfolio, we use a simple check
-  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  const adminPasswordHashBase64 = process.env.ADMIN_PASSWORD_HASH;
 
-  if (password === adminPassword) {
-    // In a real app, you would set a secure cookie or JWT
+  if (!adminPasswordHashBase64) {
+    console.error('ADMIN_PASSWORD_HASH is not defined in environment variables');
+    return NextResponse.json({ success: false, error: 'Server configuration error' }, { status: 500 });
+  }
+
+  // Decode from Base64 to get the actual bcrypt hash
+  const adminPasswordHash = Buffer.from(adminPasswordHashBase64, 'base64').toString('utf-8');
+
+  const isMatch = await bcrypt.compare(password, adminPasswordHash);
+
+  if (isMatch) {
     return NextResponse.json({ success: true });
   }
 

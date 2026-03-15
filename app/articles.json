@@ -14,27 +14,6 @@
             "content": "<h1>Introduction</h1><p>AI is transforming how we think about design. It's not just about automation, but about augmenting human creativity with powerful tools and insights.</p><p></p>",
             "id": 5,
             "publishedDate": "Mar 15, 2026"
-        },
-        {
-            "id": 2,
-            "url": "https://websecuritylab.org/how-safe-is-public-wi-fi-a-network-engineer-explains/",
-            "tags": [
-                "Networking",
-                "Cybersecurity"
-            ],
-            "title": "",
-            "description": "",
-            "image": ""
-        },
-        {
-            "id": 3,
-            "url": "https://www.freecodecamp.org/news/automate-cicd-with-github-actions-streamline-workflow/",
-            "tags": [
-                "DevOps"
-            ],
-            "title": "",
-            "description": "",
-            "image": ""
         }
     ]
 }
