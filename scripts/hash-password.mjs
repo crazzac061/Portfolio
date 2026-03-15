@@ -14,10 +14,8 @@ bcrypt.hash(password, saltRounds, (err, hash) => {
     process.exit(1);
   }
   
-  const base64Hash = Buffer.from(hash).toString('base64');
-  
-  console.log('Your hashed password (Base64 encoded):');
-  console.log(base64Hash);
+  console.log('Your hashed password:');
+  console.log(hash);
   console.log('\nAdd this to your .env.local file:');
-  console.log(`ADMIN_PASSWORD_HASH=${base64Hash}`);
+  console.log(`ADMIN_PASSWORD_HASH=${hash}`);
 });

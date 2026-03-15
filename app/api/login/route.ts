@@ -11,9 +11,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: false, error: 'Server configuration error' }, { status: 500 });
   }
 
-  // Decode from Base64 to get the actual bcrypt hash
-  const adminPasswordHash = Buffer.from(adminPasswordHashBase64, 'base64').toString('utf-8');
-
+  // Use the hash directly from environment variables
+  const adminPasswordHash = adminPasswordHashBase64.trim();
+  
   const isMatch = await bcrypt.compare(password, adminPasswordHash);
 
   if (isMatch) {
