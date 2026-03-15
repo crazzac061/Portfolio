@@ -1,45 +1,44 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import clientPromise from '@/src/utils/mongodb';
+import { ObjectId } from 'mongodb';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
-  const filePath = path.join(process.cwd(), 'app/articles.json');
   
   try {
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents);
-    
+    const client = await clientPromise;
+    const db = client.db('portfolio');
+    const collection = db.collection('articles');
+
     if (id) {
-      const article = data.articles.find((a: any) => a.id === parseInt(id));
+       // Support both numeric id and ObjectId if needed, 
+       // but for now sticking to the numeric 'id' field used in the JSON
+      const article = await collection.findOne({ id: parseInt(id) });
       if (article) {
         return NextResponse.json(article);
       }
       return NextResponse.json({ error: 'Article not found' }, { status: 404 });
     }
     
-    return NextResponse.json(data);
+    const articles = await collection.find({}).toArray();
+    return NextResponse.json({ articles });
   } catch (error) {
+    console.error('Error fetching articles:', error);
     return NextResponse.json({ articles: [] });
   }
 }
 
 export async function POST(request: Request) {
-  const newArticle = await request.json();
-  const filePath = path.join(process.cwd(), 'app/articles.json');
-
   try {
-    let data: { articles: any[] } = { articles: [] };
-    if (fs.existsSync(filePath)) {
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      data = JSON.parse(fileContents);
-    }
+    const newArticle = await request.json();
+    const client = await clientPromise;
+    const db = client.db('portfolio');
+    const collection = db.collection('articles');
 
-    // Generate a new ID
-    const nextId = data.articles.length > 0 
-      ? Math.max(...data.articles.map((a: { id: number }) => a.id)) + 1 
-      : 1;
+    // Generate a new numeric ID (to maintain compatibility with existing system)
+    const lastArticle = await collection.find().sort({ id: -1 }).limit(1).toArray();
+    const nextId = lastArticle.length > 0 ? (lastArticle[0].id || 0) + 1 : 1;
 
     const articleWithId = {
       ...newArticle,
@@ -49,12 +48,10 @@ export async function POST(request: Request) {
         month: 'short',
         day: 'numeric'
       }),
-      content: newArticle.content || '' // Ensure content is stored
+      content: newArticle.content || ''
     };
 
-    data.articles.unshift(articleWithId); // Add to the beginning
-
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
+    await collection.insertOne(articleWithId);
 
     return NextResponse.json({ success: true, article: articleWithId });
   } catch (error) {
@@ -71,24 +68,16 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: 'ID is required' }, { status: 400 });
   }
 
-  const filePath = path.join(process.cwd(), 'app/articles.json');
-
   try {
-    if (!fs.existsSync(filePath)) {
-      return NextResponse.json({ error: 'Data file not found' }, { status: 404 });
-    }
+    const client = await clientPromise;
+    const db = client.db('portfolio');
+    const collection = db.collection('articles');
 
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents);
-    
-    const initialLength = data.articles.length;
-    data.articles = data.articles.filter((a: any) => a.id !== parseInt(id));
-    
-    if (data.articles.length === initialLength) {
+    const result = await collection.deleteOne({ id: parseInt(id) });
+
+    if (result.deletedCount === 0) {
       return NextResponse.json({ error: 'Article not found' }, { status: 404 });
     }
-
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
 
     return NextResponse.json({ success: true, message: 'Article deleted successfully' });
   } catch (error) {

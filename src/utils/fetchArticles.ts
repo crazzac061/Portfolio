@@ -1,92 +1,79 @@
-import { getPublishedDate } from './getPublishedDate';
-import { getTitle } from './getTitle';
-import { getImageURL } from './getImageURL';
-import { getDescription } from './getDescription';
-import { getPlatform } from './getPlatform';
-import articleFile from '@/app/articles.json';
 import { Article } from '../components/ArticleCard';
 import * as cheerio from 'cheerio';
 
 export async function fetchArticles(): Promise<Article[]> {
   console.log('Fetching articles...');
-  const results = await Promise.all(
-    articleFile.articles.map(async (item) => {
-      //Validate URL first
-       if (!item.url || typeof item.url !== 'string' || item.url.trim() === '') {
-        console.warn(`Invalid URL: ${item.url}`);
-        return null; // Skip this item
-      } 
-      console.log('The URL: ' + item.url);
-      let data;
-      try {
+  
+  try {
+    // Fetch from our local API which now uses MongoDB
+    // Note: In Next.js, we can use a relative URL if this is called frontend-side, 
+    // but if it's called during SSR/build, we might need an absolute URL or a direct DB call.
+    // However, since we want to keep the scraping logic, we'll keep it as is but get the list of URLs from the DB.
+    
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/blog`);
+    const data = await response.json();
+    const articlesFromDb = data.articles || [];
 
-        // Fetch metadata and HTML from the URL
-        const response = await fetch(item.url, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Referer': 'https://www.google.com/', 
-          },
-        });
+    const results = await Promise.all(
+      articlesFromDb.map(async (item: any) => {
+        // If the item already has full content/metadata from the DB, we can skip scraping
+        // but the current implementation seems to scrap every time. 
+        // Let's preserve the scraping fallback but prioritize DB data.
 
-        console.log('Fetched: '+ item.url);
-
-        if (!response.ok) {
-          console.error(`HTTP error! Status: ${response.status} for URL: ${item.url}`);
-          throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!item.url || typeof item.url !== 'string' || item.url.trim() === '') {
+          console.warn(`Invalid URL: ${item.url}`);
+          return null;
         }
 
-        const html = await response.text();
-        const $ = cheerio.load(html);
-        const jsonScript = $('script[type="application/ld+json"]').html();
-
-        console.log('Gotten HTML response');
-
-        if (!jsonScript) {
-          throw new Error('No JSON-LD script found on page');
+        // If it's an internal blog post (starts with /blog), it doesn't need external scraping
+        if (item.url.startsWith('/blog/')) {
+          return item as Article;
         }
 
-        const metadata = JSON.parse(jsonScript);
-        console.log('Gotten metadata');
+        console.log('Scraping URL: ' + item.url);
+        let scrapedData;
+        try {
+          const fetchResponse = await fetch(item.url, {
+            headers: {
+              'User-Agent': 'Mozilla/5.0 ...',
+              'Accept': 'text/html,...',
+            },
+          });
 
+          if (!fetchResponse.ok) throw new Error(`HTTP error ${fetchResponse.status}`);
+          
+          const html = await fetchResponse.text();
+          const $ = cheerio.load(html);
+          const jsonScript = $('script[type="application/ld+json"]').html();
+          scrapedData = { metadata: jsonScript ? JSON.parse(jsonScript) : {}, html };
+        } catch (error) {
+          console.error(`Scraping failed for ${item.url}:`, error);
+          return item as Article; // Return what we have in DB if scraping fails
+        }
 
-        // Combine metadata and HTML into a single object
-        data = { metadata, html };
-      } catch (error) {
-        console.error(`Failed to fetch metadata for URL: ${item.url}`, error);
-        return null;
-        console.log('The default empty object has been returned here');
-      }
-
-      // Use the combined data (metadata and HTML) to construct the article object
-      if(getTitle(data) && getDescription(data) &&
-         getPublishedDate(data) && getImageURL(data) &&
-         getPlatform(data) || (item.title && item.description &&
-         item.imgUrl)) {
         return {
-        ...item,
-        id: item.id ?? 0,
-        tags: item.tags ?? [],
-        title: getTitle(data) || item.title || 'No title',
-        description: item.description || getDescription(data) || 'No description',
-        publishedDate: getPublishedDate(data) ?? 'No date',
-        imgUrl: getImageURL(data) || item.imgUrl || '/img-2.jpg',
-        siteName: getPlatform(data) || data.metadata?.publisher?.name || 'Unknown site',
-        url: item.url || '',
-      } as Article;
-      console.log('Proper item returned');
-      } else { return null; }
-    })
-  );
+          ...item,
+          id: item.id ?? 0,
+          tags: item.tags ?? [],
+          title: item.title || 'No title',
+          description: item.description || 'No description',
+          publishedDate: item.publishedDate || 'No date',
+          imgUrl: item.imgUrl || '/img-2.jpg',
+          siteName: item.siteName || 'Unknown site',
+          url: item.url || '',
+        } as Article;
+      })
+    );
 
-  // Filter out null values and sort the articles by published date in descending order
-  const filteredResults = results.filter((article): article is Article => article !== null);
-  const sortedResults = filteredResults.sort((a, b) => {
-    const dateA = new Date(a.publishedDate || '').getTime();
-    const dateB = new Date(b.publishedDate || '').getTime();
-    return dateB - dateA;
-  });
-  console.log(sortedResults);
-  return sortedResults;
+    const filteredResults = results.filter((article): article is Article => article !== null);
+    return filteredResults.sort((a, b) => {
+      const dateA = new Date(a.publishedDate || '').getTime();
+      const dateB = new Date(b.publishedDate || '').getTime();
+      return dateB - dateA;
+    });
+  } catch (error) {
+    console.error('Failed to fetch articles from API:', error);
+    return [];
+  }
 }
