@@ -1,9 +1,22 @@
-import Hero from '@/src/components/hero';
+import fs from 'fs';
+import path from 'path';
+import HomeClient from './Homeclient';
 
 export default function HomePage() {
+  const filePath = path.join(process.cwd(), 'app/articles.json');
+  let initialArticles = [];
+  
+  try {
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(fileContents);
+    initialArticles = data.articles || [];
+  } catch (error) {
+    console.error('Error loading articles:', error);
+  }
+
   return (
     <main>
-      <Hero />
+      <HomeClient initialArticles={initialArticles} />
     </main>
   );
 }

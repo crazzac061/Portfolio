@@ -2,7 +2,12 @@
 
 import Link from 'next/link';
 
-export default function Hero() {
+interface HeroProps {
+  searchTerm: string;
+  setSearchTerm: (value: string) => void;
+}
+
+export default function Hero({ searchTerm, setSearchTerm }: HeroProps) {
     return (
         <section className="pt-32 pb-20 px-6 md:px-12 bg-black text-white min-h-screen flex items-center">
             <div className="max-w-7xl mx-auto w-full">
@@ -54,6 +59,37 @@ export default function Hero() {
                             >
                                 Learning
                             </Link>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Search Bar */}
+                <div className="mt-12 max-w-2xl">
+                    <div className="relative group">
+                        <div className="absolute inset-0 bg-blue-500/20 rounded-2xl blur-xl group-hover:bg-blue-500/30 transition-all opacity-0 group-hover:opacity-100"></div>
+                        <div className="relative flex items-center bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden focus-within:border-white/50 transition-all">
+                            <div className="pl-6 text-zinc-500">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Search stories, topics, or articles..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full px-4 py-5 bg-transparent text-white focus:outline-none placeholder:text-zinc-600 text-lg"
+                            />
+                            {searchTerm && (
+                                <button 
+                                    onClick={() => setSearchTerm('')}
+                                    className="pr-6 text-zinc-500 hover:text-white transition-colors"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
