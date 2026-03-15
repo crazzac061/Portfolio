@@ -16,32 +16,6 @@
             "publishedDate": "Mar 15, 2026"
         },
         {
-            "title": "Test Blog from Agent",
-            "description": "This is a test blog post created by the AI assistant to verify functionality.",
-            "url": "https://example.com",
-            "imgUrl": "",
-            "siteName": "AI Assistant",
-            "tags": [
-                "Test",
-                "AI",
-                "Automation"
-            ],
-            "id": 4,
-            "publishedDate": "Mar 15, 2026"
-        },
-        {
-            "id": 1,
-            "url": "https://thenetworkbits.substack.com/p/an-overview-of-json",
-            "tags": [
-                "Web Dev",
-                "DevOps",
-                "Cloud"
-            ],
-            "title": "",
-            "description": "",
-            "image": ""
-        },
-        {
             "id": 2,
             "url": "https://websecuritylab.org/how-safe-is-public-wi-fi-a-network-engineer-explains/",
             "tags": [

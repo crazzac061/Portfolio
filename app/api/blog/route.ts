@@ -62,3 +62,37 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: false, error: 'Failed to save article' }, { status: 500 });
   }
 }
+
+export async function DELETE(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+  
+  if (!id) {
+    return NextResponse.json({ error: 'ID is required' }, { status: 400 });
+  }
+
+  const filePath = path.join(process.cwd(), 'app/articles.json');
+
+  try {
+    if (!fs.existsSync(filePath)) {
+      return NextResponse.json({ error: 'Data file not found' }, { status: 404 });
+    }
+
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(fileContents);
+    
+    const initialLength = data.articles.length;
+    data.articles = data.articles.filter((a: any) => a.id !== parseInt(id));
+    
+    if (data.articles.length === initialLength) {
+      return NextResponse.json({ error: 'Article not found' }, { status: 404 });
+    }
+
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
+
+    return NextResponse.json({ success: true, message: 'Article deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting article:', error);
+    return NextResponse.json({ error: 'Failed to delete article' }, { status: 500 });
+  }
+}

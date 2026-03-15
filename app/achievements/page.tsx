@@ -28,15 +28,15 @@ export default function AchievementsPage() {
                     </div>
 
                     <div className="border-l-4 border-blue-500 pl-6 py-4">
-                        <h3 className="text-2xl font-bold mb-2">2023 - Open Source Contributor</h3>
-                        <p className="text-gray-400 mb-2">Contributed to 5+ major open source projects</p>
-                        <span className="text-sm text-gray-500">GitHub Community</span>
+                        <h3 className="text-2xl font-bold mb-2">Participant first Nepal Waste Hackathon</h3>
+                        <p className="text-gray-400 mb-2">Made a project titled "Sudha" that helps in circular landfill wastage.</p>
+                        <span className="text-sm text-gray-500">Hackathon</span>
                     </div>
 
                     <div className="border-l-4 border-blue-500 pl-6 py-4">
-                        <h3 className="text-2xl font-bold mb-2">2022 - Technical Speaker</h3>
-                        <p className="text-gray-400 mb-2">Spoke at 10+ international tech conferences</p>
-                        <span className="text-sm text-gray-500">Tech Conference Circuit</span>
+                        <h3 className="text-2xl font-bold mb-2">Graphic Designer at Free Student Union, Pulchowk Campus</h3>
+                        <p className="text-gray-400 mb-2">Helping Free Student Union in graphic designing.</p>
+                        <span className="text-sm text-gray-500">Pulchowk Campus</span>
                     </div>
                 </div>
             </div>
