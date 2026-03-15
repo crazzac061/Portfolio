@@ -1,9 +1,42 @@
 {
     "articles": [
         {
+            "title": "The Future of AI Design",
+            "description": "How AI is reshaping the design landscape.",
+            "url": "/blog/the-future-of-ai-design",
+            "imgUrl": "",
+            "siteName": "Design",
+            "tags": [
+                "AI",
+                "UX",
+                "UI"
+            ],
+            "content": "<h1>Introduction</h1><p>AI is transforming how we think about design. It's not just about automation, but about augmenting human creativity with powerful tools and insights.</p><p></p>",
+            "id": 5,
+            "publishedDate": "Mar 15, 2026"
+        },
+        {
+            "title": "Test Blog from Agent",
+            "description": "This is a test blog post created by the AI assistant to verify functionality.",
+            "url": "https://example.com",
+            "imgUrl": "",
+            "siteName": "AI Assistant",
+            "tags": [
+                "Test",
+                "AI",
+                "Automation"
+            ],
+            "id": 4,
+            "publishedDate": "Mar 15, 2026"
+        },
+        {
             "id": 1,
             "url": "https://thenetworkbits.substack.com/p/an-overview-of-json",
-            "tags": ["Web Dev", "DevOps", "Cloud"],
+            "tags": [
+                "Web Dev",
+                "DevOps",
+                "Cloud"
+            ],
             "title": "",
             "description": "",
             "image": ""
@@ -11,7 +44,10 @@
         {
             "id": 2,
             "url": "https://websecuritylab.org/how-safe-is-public-wi-fi-a-network-engineer-explains/",
-            "tags": ["Networking", "Cybersecurity"],
+            "tags": [
+                "Networking",
+                "Cybersecurity"
+            ],
             "title": "",
             "description": "",
             "image": ""
@@ -19,7 +55,9 @@
         {
             "id": 3,
             "url": "https://www.freecodecamp.org/news/automate-cicd-with-github-actions-streamline-workflow/",
-            "tags": ["DevOps"],
+            "tags": [
+                "DevOps"
+            ],
             "title": "",
             "description": "",
             "image": ""

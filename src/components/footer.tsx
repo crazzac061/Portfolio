@@ -35,7 +35,7 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    {/* Social */}
+                    {/* Social
                     <div>
                         <h3 className="font-bold text-lg mb-4">Connect</h3>
                         <div className="flex gap-4">
@@ -56,14 +56,14 @@ export default function Footer() {
                                 </svg>
                             </a>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
-                {/* Bottom */}
+                {/* Bottom
                 <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
                     <p>© {new Date().getFullYear()} Bini Chand. All rights reserved.</p>
                     <p>Built with Next.js, TypeScript, and Tailwind CSS</p>
-                </div>
+                </div> */}
             </div>
         </footer>
     );

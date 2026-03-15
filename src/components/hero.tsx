@@ -10,20 +10,20 @@ export default function Hero() {
                     {/* Left Side - Designer */}
                     <div className="flex flex-col justify-center space-y-6">
                         <div>
-                            <h3 className="text-lg md:text-xl text-gray-400 mb-2">UI/UX Designer</h3>
-                            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-4">designer</h1>
+                            <h3 className="text-lg md:text-xl text-gray-400 mb-2">Web Designer</h3>
+                            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-4">developer</h1>
                             <p className="text-gray-400 max-w-md">
-                                UI/UX Designer with a passion for designing beautiful and functional user experiences.
+                                Web Designer with a passion for designing beautiful and functional website experiences.
                             </p>
                         </div>
                         <div className="flex gap-4 pt-4">
-                            <Link 
+                            <Link
                                 href="/projects"
                                 className="px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors"
                             >
                                 View Work
                             </Link>
-                            <Link 
+                            <Link
                                 href="#contact"
                                 className="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-black transition-colors"
                             >
@@ -42,13 +42,13 @@ export default function Hero() {
                             </p>
                         </div>
                         <div className="flex gap-4 pt-4">
-                            <Link 
+                            <Link
                                 href="/projects"
                                 className="px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors"
                             >
                                 View Code
                             </Link>
-                            <Link 
+                            <Link
                                 href="/learning"
                                 className="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-black transition-colors"
                             >
