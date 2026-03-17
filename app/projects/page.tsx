@@ -14,9 +14,9 @@ export default function ProjectsPage() {
                             <span className="text-gray-300">Project Image</span>
                         </div>
                         <div className="p-6">
-                            <h3 className="text-2xl font-bold mb-2">E-Commerce Platform</h3>
+                            <h3 className="text-2xl font-bold mb-2">Dummy value1</h3>
                             <p className="text-gray-400 mb-4">
-                                A full-stack e-commerce solution built with Next.js, TypeScript, and Stripe integration.
+                                This is dummy value.
                             </p>
                             <div className="flex flex-wrap gap-2 mb-4">
                                 <span className="px-3 py-1 bg-blue-900 text-blue-200 rounded-full text-sm">Next.js</span>
@@ -32,9 +32,9 @@ export default function ProjectsPage() {
                             <span className="text-gray-300">Project Image</span>
                         </div>
                         <div className="p-6">
-                            <h3 className="text-2xl font-bold mb-2">Design System</h3>
+                            <h3 className="text-2xl font-bold mb-2">Dummy Value 2</h3>
                             <p className="text-gray-400 mb-4">
-                                Comprehensive design system with 50+ reusable components and documentation.
+                                This is dummy value.
                             </p>
                             <div className="flex flex-wrap gap-2 mb-4">
                                 <span className="px-3 py-1 bg-purple-900 text-purple-200 rounded-full text-sm">React</span>
@@ -45,7 +45,7 @@ export default function ProjectsPage() {
                         </div>
                     </div>
 
-                    <div className="bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow border border-gray-800">
+                    {/* <div className="bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow border border-gray-800">
                         <div className="h-48 bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center">
                             <span className="text-gray-300">Project Image</span>
                         </div>
@@ -61,9 +61,9 @@ export default function ProjectsPage() {
                             </div>
                             <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">View Project →</a>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow border border-gray-800">
+                    {/* <div className="bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow border border-gray-800">
                         <div className="h-48 bg-gradient-to-br from-orange-600 to-orange-800 flex items-center justify-center">
                             <span className="text-gray-300">Project Image</span>
                         </div>
@@ -79,7 +79,7 @@ export default function ProjectsPage() {
                             </div>
                             <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">View Project →</a>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </main>

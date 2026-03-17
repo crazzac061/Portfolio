@@ -15,35 +15,35 @@ export default function LearningPage() {
                         </h2>
                         <div className="grid md:grid-cols-2 gap-4">
                             <div className="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors">
-                                <h3 className="text-xl font-bold mb-2">Advanced TypeScript</h3>
-                                <p className="text-gray-400 mb-4">Mastering advanced TypeScript patterns and types.</p>
+                                <h3 className="text-xl font-bold mb-2">Wireless Technologies</h3>
+                                <p className="text-gray-400 mb-4">Mastering wireless 5G technologies.</p>
                                 <div className="w-full bg-gray-800 rounded-full h-2">
-                                    <div className="bg-blue-500 h-2 rounded-full" style={{width: '75%'}}></div>
+                                    <div className="bg-blue-500 h-2 rounded-full" style={{width: '10%'}}></div>
                                 </div>
-                                <p className="text-sm text-gray-500 mt-2">75% Complete</p>
+                                <p className="text-sm text-gray-500 mt-2">10% Complete</p>
                             </div>
 
                             <div className="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors">
                                 <h3 className="text-xl font-bold mb-2">Web Performance</h3>
                                 <p className="text-gray-400 mb-4">Optimizing web applications for speed and efficiency.</p>
                                 <div className="w-full bg-gray-800 rounded-full h-2">
-                                    <div className="bg-blue-500 h-2 rounded-full" style={{width: '60%'}}></div>
+                                    <div className="bg-blue-500 h-2 rounded-full" style={{width: '25%'}}></div>
                                 </div>
-                                <p className="text-sm text-gray-500 mt-2">60% Complete</p>
+                                <p className="text-sm text-gray-500 mt-2">25% Complete</p>
                             </div>
 
                             <div className="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors">
                                 <h3 className="text-xl font-bold mb-2">System Design</h3>
                                 <p className="text-gray-400 mb-4">Learning to design scalable systems and architecture.</p>
                                 <div className="w-full bg-gray-800 rounded-full h-2">
-                                    <div className="bg-blue-500 h-2 rounded-full" style={{width: '50%'}}></div>
+                                    <div className="bg-blue-500 h-2 rounded-full" style={{width: '30%'}}></div>
                                 </div>
-                                <p className="text-sm text-gray-500 mt-2">50% Complete</p>
+                                <p className="text-sm text-gray-500 mt-2">30% Complete</p>
                             </div>
 
                             <div className="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors">
-                                <h3 className="text-xl font-bold mb-2">AI & Machine Learning</h3>
-                                <p className="text-gray-400 mb-4">Introduction to ML and AI for web developers.</p>
+                                <h3 className="text-xl font-bold mb-2">5G network Topologies</h3>
+                                <p className="text-gray-400 mb-4">The OG of wireless technology 5G</p>
                                 <div className="w-full bg-gray-800 rounded-full h-2">
                                     <div className="bg-blue-500 h-2 rounded-full" style={{width: '30%'}}></div>
                                 </div>
@@ -98,9 +98,9 @@ export default function LearningPage() {
                             <span className="text-purple-500">🔗</span> Favorite Resources
                         </h2>
                         <ul className="space-y-3 text-gray-400">
-                            <li>• <a href="#" className="text-blue-400 hover:text-blue-300">MDN Web Docs</a> - Comprehensive web development documentation</li>
-                            <li>• <a href="#" className="text-blue-400 hover:text-blue-300">CSS-Tricks</a> - Advanced CSS techniques and tutorials</li>
-                            <li>• <a href="#" className="text-blue-400 hover:text-blue-300">Dev.to</a> - Community-driven technical articles</li>
+                            <li>• <a href="https://developer.mozilla.org/en-US/" className="text-blue-400 hover:text-blue-300">MDN Web Docs</a> - Comprehensive web development documentation</li>
+                            <li>• <a href="https://www.sharetechnote.com/html/5G/5G_RAN_Architecture.html" className="text-blue-400 hover:text-blue-300">5G Topologies</a> - 5G Architecture and topologies</li>
+                            <li>• <a href="https://www.sharetechnote.com/html/5G/5G_RAN_Architecture.html" className="text-blue-400 hover:text-blue-300">FrontEnd master</a>Learn about full stack development.</li>
                             <li>• <a href="#" className="text-blue-400 hover:text-blue-300">GitHub</a> - Learning from open source projects</li>
                             <li>• <a href="#" className="text-blue-400 hover:text-blue-300">YouTube</a> - Video tutorials and talks</li>
                         </ul>
