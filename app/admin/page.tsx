@@ -92,7 +92,7 @@ export default function AdminPage() {
     setLoading(true);
     setMessage('');
 
-    const currentStatus = isDraftSubmit ? 'draft' : status;
+    const currentStatus = isDraftSubmit ? 'draft' : 'published';
 
     const blogPost = {
       id: editingId,
@@ -270,26 +270,6 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-zinc-500 ml-1 font-bold">Status</label>
-                <div className="flex gap-4">
-                  <button
-                    type="button"
-                    onClick={() => setStatus('published')}
-                    className={`px-6 py-2 rounded-xl border transition-all ${status === 'published' ? 'bg-white text-black border-white' : 'bg-transparent text-zinc-500 border-zinc-800'}`}
-                  >
-                    Published
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setStatus('draft')}
-                    className={`px-6 py-2 rounded-xl border transition-all ${status === 'draft' ? 'bg-white text-black border-white' : 'bg-transparent text-zinc-500 border-zinc-800'}`}
-                  >
-                    Draft
-                  </button>
-                </div>
-              </div>
-
               {message && (
                 <div className={`p-4 rounded-xl border ${message.includes('successfully') ? 'bg-green-500/10 border-green-500/50 text-green-500' : 'bg-red-500/10 border-red-500/50 text-red-500'}`}>
                   {message}
@@ -298,22 +278,21 @@ export default function AdminPage() {
 
               <div className="flex flex-col md:flex-row gap-4">
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={(e) => handleSubmit(e, false)}
                   disabled={loading}
                   className="flex-1 py-4 bg-white text-black font-bold rounded-2xl hover:bg-zinc-200 transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:scale-100 shadow-xl shadow-zinc-500/10"
                 >
-                  {loading ? 'Processing...' : editingId ? 'Update Post' : 'Publish Blog Post'}
+                  {loading ? 'Processing...' : (editingId && status === 'published') ? 'Update Post' : 'Publish Blog Post'}
                 </button>
-                {!editingId && (
-                  <button
-                    type="button"
-                    onClick={(e) => handleSubmit(e as any, true)}
-                    disabled={loading}
-                    className="flex-1 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-zinc-800 transition-all border border-zinc-800"
-                  >
-                    Save as Draft
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={(e) => handleSubmit(e, true)}
+                  disabled={loading}
+                  className="flex-1 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-zinc-800 transition-all border border-zinc-800"
+                >
+                  {loading ? 'Processing...' : status === 'draft' ? (editingId ? 'Save Draft' : 'Save as Draft') : 'Move to Draft'}
+                </button>
               </div>
             </form>
           </div>
