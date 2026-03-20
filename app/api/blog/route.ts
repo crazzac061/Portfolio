@@ -5,6 +5,7 @@ import { ObjectId } from 'mongodb';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
+  const isAdmin = searchParams.get('admin') === 'true';
   
   try {
     const client = await clientPromise;
@@ -16,12 +17,18 @@ export async function GET(request: Request) {
        // but for now sticking to the numeric 'id' field used in the JSON
       const article = await collection.findOne({ id: parseInt(id) });
       if (article) {
+        // Only show if published or if admin
+        if (article.status === 'draft' && !isAdmin) {
+          return NextResponse.json({ error: 'Article not found' }, { status: 404 });
+        }
         return NextResponse.json(article);
       }
       return NextResponse.json({ error: 'Article not found' }, { status: 404 });
     }
     
-    const articles = await collection.find({}).toArray();
+    // Filter for non-admins
+    const query = isAdmin ? {} : { status: { $ne: 'draft' } };
+    const articles = await collection.find(query).toArray();
     return NextResponse.json({ articles });
   } catch (error) {
     console.error('Error fetching articles:', error);
@@ -40,7 +47,7 @@ export async function POST(request: Request) {
     const lastArticle = await collection.find().sort({ id: -1 }).limit(1).toArray();
     const nextId = lastArticle.length > 0 ? (lastArticle[0].id || 0) + 1 : 1;
 
-    const articleWithId = {
+    const articleWithDefaults = {
       ...newArticle,
       id: nextId,
       publishedDate: new Date().toLocaleDateString('en-US', {
@@ -48,15 +55,45 @@ export async function POST(request: Request) {
         month: 'short',
         day: 'numeric'
       }),
-      content: newArticle.content || ''
+      content: newArticle.content || '',
+      status: newArticle.status || 'published'
     };
 
-    await collection.insertOne(articleWithId);
+    await collection.insertOne(articleWithDefaults);
 
-    return NextResponse.json({ success: true, article: articleWithId });
+    return NextResponse.json({ success: true, article: articleWithDefaults });
   } catch (error) {
     console.error('Error saving article:', error);
     return NextResponse.json({ success: false, error: 'Failed to save article' }, { status: 500 });
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const updatedArticle = await request.json();
+    const { id, ...updateData } = updatedArticle;
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required' }, { status: 400 });
+    }
+
+    const client = await clientPromise;
+    const db = client.db('portfolio');
+    const collection = db.collection('articles');
+
+    const result = await collection.updateOne(
+      { id: parseInt(id) },
+      { $set: updateData }
+    );
+
+    if (result.matchedCount === 0) {
+      return NextResponse.json({ error: 'Article not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, message: 'Article updated successfully' });
+  } catch (error) {
+    console.error('Error updating article:', error);
+    return NextResponse.json({ error: 'Failed to update article' }, { status: 500 });
   }
 }
 

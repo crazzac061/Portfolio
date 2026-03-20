@@ -9,7 +9,7 @@ export default function Footer() {
                     <div>
                         <h3 className="font-bold text-lg mb-4">About</h3>
                         <p className="text-gray-400 text-sm">
-                            A full-stack developer and UI/UX designer passionate about creating beautiful and functional web experiences.
+                            A student and full stack developer passionate about creating beautiful and functional web experiences.
                         </p>
                     </div>
 

@@ -101,8 +101,8 @@ export default function LearningPage() {
                             <li>• <a href="https://developer.mozilla.org/en-US/" className="text-blue-400 hover:text-blue-300">MDN Web Docs</a> - Comprehensive web development documentation</li>
                             <li>• <a href="https://www.sharetechnote.com/html/5G/5G_RAN_Architecture.html" className="text-blue-400 hover:text-blue-300">5G Topologies</a> - 5G Architecture and topologies</li>
                             <li>• <a href="https://www.sharetechnote.com/html/5G/5G_RAN_Architecture.html" className="text-blue-400 hover:text-blue-300">FrontEnd master</a>Learn about full stack development.</li>
-                            <li>• <a href="#" className="text-blue-400 hover:text-blue-300">GitHub</a> - Learning from open source projects</li>
-                            <li>• <a href="#" className="text-blue-400 hover:text-blue-300">YouTube</a> - Video tutorials and talks</li>
+                            {/* <li>• <a href="#" className="text-blue-400 hover:text-blue-300">GitHub</a> - Learning from open source projects</li>
+                            <li>• <a href="#" className="text-blue-400 hover:text-blue-300">YouTube</a> - Video tutorials and talks</li> */}
                         </ul>
                     </section>
                 </div>

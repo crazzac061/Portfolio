@@ -72,9 +72,9 @@ export default function MainBody({ searchTerm, articles }: MainBodyProps) {
         ))}
       </div>
 
-      <div id="articlegrid" className="w-[100vw] md:w-[98vw] grid gap-2 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5 px-3 py-3">
+      {/* <div id="articlegrid" className="w-[100vw] md:w-[98vw] grid gap-2 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5 px-3 py-3">
         <ArticleCard articles={filteredArticles} />
-      </div>
+      </div> */}
     </div>
   );
 }
