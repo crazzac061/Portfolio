@@ -9,8 +9,7 @@ import { Table } from '@tiptap/extension-table';
 import { TableRow } from '@tiptap/extension-table-row';
 import { TableHeader } from '@tiptap/extension-table-header';
 import { TableCell } from '@tiptap/extension-table-cell';
-import { Bold, Italic, List, ListOrdered, Heading1, Heading2, Image as ImageIcon, Table as TableIcon, Palmtree, Square, Type } from 'lucide-react';
-import { ExcalidrawExtension } from '../extension/Excalidraw';
+import { Bold, Italic, List, ListOrdered, Heading1, Heading2, Image as ImageIcon, Table as TableIcon } from 'lucide-react';
 
 interface EditorProps {
   content: string;
@@ -47,7 +46,6 @@ const Editor = ({ content, onChange }: EditorProps) => {
           class: 'border border-zinc-800 p-2 min-w-[100px]',
         },
       }),
-      ExcalidrawExtension,
     ],
     content,
     immediatelyRender: false,
@@ -168,14 +166,6 @@ const Editor = ({ content, onChange }: EditorProps) => {
           title="Insert Table"
         >
           <TableIcon size={18} />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().setExcalidraw().run()}
-          className={`p-2 rounded hover:bg-zinc-800 transition-colors ${editor.isActive('excalidraw') ? 'text-white bg-zinc-800' : 'text-zinc-500'}`}
-          type="button"
-          title="Insert Whiteboard"
-        >
-          <Square size={18} />
         </button>
       </div>
       <div className="p-6">
