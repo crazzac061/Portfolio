@@ -28,15 +28,20 @@ const ExcalidrawComponent = ({ node, updateAttributes }: NodeViewProps) => {
 
   return (
     <NodeViewWrapper className="excalidraw-node my-4">
-      <div className="w-full h-[500px] border border-zinc-800 rounded-xl overflow-hidden relative group">
+      <div className="w-full h-[300px] min-h-[200px] border border-zinc-800 rounded-xl overflow-hidden relative group"
+           style={{ resize: 'vertical' }}>
         <Excalidraw
           initialData={data}
           onChange={onChange}
           theme="dark"
         />
       </div>
+      <div className="text-[10px] text-zinc-600 mt-1 text-right">
+        Drag bottom-right to resize whiteboard
+      </div>
     </NodeViewWrapper>
   );
 };
+
 
 export default ExcalidrawComponent;

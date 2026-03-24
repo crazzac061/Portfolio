@@ -56,7 +56,7 @@ const Editor = ({ content, onChange }: EditorProps) => {
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-invert max-w-none focus:outline-none min-h-[400px] text-zinc-300',
+        class: 'prose prose-invert max-w-4xl mx-auto focus:outline-none min-h-[400px] text-zinc-300 overflow-x-hidden',
       },
       handlePaste: (view, event) => {
         const items = Array.from(event.clipboardData?.items || []);
